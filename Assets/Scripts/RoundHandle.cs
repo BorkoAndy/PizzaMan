@@ -16,8 +16,7 @@ public class RoundHandle : MonoBehaviour
         Quaternion r = Quaternion.AngleAxis(-newAngle, Vector3.forward);
         handle.rotation = r;
       
-        Speeder =newAngle;
-        Debug.Log(Speeder);       
+        Speeder =newAngle;             
     }
     public void OnPointerUp()
     {

@@ -10,11 +10,7 @@ public class ObstacleSpawn : MonoBehaviour
 
     private bool canSpawn = false;
     private Obstacle newObstacle;
-    private void Start()
-    {
-        newObstacle = ObstaclesPool.pool.Dequeue();
-        newObstacle.destinationPoint = destinationPoint;
-    }
+   
     
 
     private void Update()
@@ -29,8 +25,12 @@ public class ObstacleSpawn : MonoBehaviour
     }
     private void SpawningCondition()
     {
-        Debug.Log((transform.position - player.transform.position).magnitude);
         if ((transform.position - player.transform.position).magnitude < distanseToSpawnObstacle)
-            canSpawn= true;
+        { 
+            canSpawn = true;
+            newObstacle = ObstaclesPool.pool.Dequeue();
+            newObstacle.destinationPoint = destinationPoint;
+        }
+
     }
 }
