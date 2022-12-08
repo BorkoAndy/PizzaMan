@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMove : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private float speed;    
 
-    // Update is called once per frame
-    void Update()
+    private void Update() => Move();
+    private void Move()
     {
         
+        transform.Translate(Vector3.forward * (speed + RoundHandle.Speeder) * Time.deltaTime);
     }
 }
