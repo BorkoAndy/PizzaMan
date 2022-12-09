@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Obstacle : MonoBehaviour
-{
-    
+{    
     [SerializeField] private float minSpeed;
     [SerializeField] private float maxSpeed;
 
@@ -17,11 +14,15 @@ public class Obstacle : MonoBehaviour
     }
     private void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, destinationPoint.position, speed * Time.deltaTime);
+        Move();
+
         if(transform.position == destinationPoint.position)
-        {
-            this.gameObject.SetActive(false);
-            ObstaclesPool.pool.Enqueue(this);
-        }
+            ReturnToPool();    
+    }
+    private void Move() => transform.position = Vector3.MoveTowards(transform.position, destinationPoint.position, speed * Time.deltaTime);
+    private void ReturnToPool()
+    {
+        this.gameObject.SetActive(false);
+        ObstaclesPool.pool.Enqueue(this);
     }
 }

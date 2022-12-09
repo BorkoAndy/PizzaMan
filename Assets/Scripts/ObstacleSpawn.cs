@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ObstacleSpawn : MonoBehaviour
@@ -9,28 +7,24 @@ public class ObstacleSpawn : MonoBehaviour
     [SerializeField] private Transform destinationPoint;
 
     private bool canSpawn = false;
-    private Obstacle newObstacle;
-   
-    
+    private Obstacle newObstacle; 
 
     private void Update()
     {
         if (!canSpawn) SpawningCondition();
-        else
-        {
-            newObstacle.transform.position = transform.position;
-            newObstacle.gameObject.SetActive(true);
-            this.gameObject.SetActive(false);
-        }
+        else SpawnObstacle();       
     }
     private void SpawningCondition()
     {
-        if ((transform.position - player.transform.position).magnitude < distanseToSpawnObstacle)
-        { 
+        if ((transform.position - player.transform.position).magnitude < distanseToSpawnObstacle) 
             canSpawn = true;
-            newObstacle = ObstaclesPool.pool.Dequeue();
-            newObstacle.destinationPoint = destinationPoint;
-        }
-
+    }
+    private void SpawnObstacle()
+    {
+        newObstacle = ObstaclesPool.pool.Dequeue();
+        newObstacle.destinationPoint = destinationPoint;
+        newObstacle.transform.position = transform.position;
+        newObstacle.gameObject.SetActive(true);
+        this.gameObject.SetActive(false);
     }
 }
